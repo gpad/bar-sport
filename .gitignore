@@ -3,3 +3,5 @@
 /deps
 erl_crash.dump
 *.ez
+/public/dist/
+/node_modules

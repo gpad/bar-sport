@@ -5,6 +5,7 @@ defmodule BarSport.Router do
 
   plug Plug.Static, at: "/", from: "./public", only: ["index.html"]
   plug Plug.Static, at: "/assets", from: "./public/assets"
+  plug Plug.Static, at: "/dist", from: "./public/dist"
 
   plug :match
   plug :dispatch

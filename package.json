@@ -1,0 +1,17 @@
+{
+  "name": "bar_sport",
+  "version": "1.0.0",
+  "description": "example chat application",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "karma start"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^1.12.9"
+  }
+}
