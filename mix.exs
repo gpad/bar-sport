@@ -14,9 +14,12 @@ defmodule BarSport.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :cowboy],
+    [applications: applications_for(Mix.env),
      mod: {BarSport, []}]
   end
+
+  defp applications_for(:dev), do: applications_for(:all) ++ [:remix]
+  defp applications_for(_), do: [:logger, :cowboy]
 
   # Dependencies can be Hex packages:
   #
@@ -33,7 +36,8 @@ defmodule BarSport.Mixfile do
       {:cowboy, "~> 1.0.4"},
       {:poison, "~> 1.5.0"},
       {:web_socket, path: "../plug-web-socket"},
-      {:credo, "~> 0.1.9", only: [:dev, :test]}
+      {:credo, "~> 0.1.9", only: [:dev, :test]},
+      {:remix, "~> 0.0", only: :dev},
     ]
   end
 end

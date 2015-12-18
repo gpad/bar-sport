@@ -4,4 +4,5 @@
   "credo": {:hex, :credo, "0.1.10"},
   "plug": {:hex, :plug, "1.0.3"},
   "poison": {:hex, :poison, "1.5.0"},
-  "ranch": {:hex, :ranch, "1.2.0"}}
+  "ranch": {:hex, :ranch, "1.2.0"},
+  "remix": {:hex, :remix, "0.0.2"}}
