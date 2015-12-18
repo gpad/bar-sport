@@ -1,11 +1,12 @@
 import React from "react"
 import ReactDom from "react-dom"
-import Message from "./components/message"
+import Messages from "./components/messages"
 
 let el = document.getElementById('messages');
 console.log(el);
 
 var ws = new WebSocket("ws://localhost:8989/chat");
+var messages = [];
 ws.onopen = function (event) {
   console.log("onopen", event);
   var count = 0;
@@ -20,8 +21,9 @@ ws.onopen = function (event) {
   }, 1000);
 }
 ws.onmessage = function (event) {
+  messages.push(event.data);
   console.log("onmessage", event.data);
-  ReactDom.render(<Message message={event.data}/>, el);
+  ReactDom.render(<Messages messages={messages}/>, el);
 }
 ws.onerror = function (event) {
   console.log("error", event);
