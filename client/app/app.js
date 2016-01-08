@@ -1,12 +1,25 @@
 import React from "react"
 import ReactDom from "react-dom"
-import Messages from "./components/messages"
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
-let el = document.getElementById('messages');
-console.log(el);
+import { addMessage } from './actions'
+
+import App from "./containers/app"
+import barSportApp from './reducers'
+
+let store = createStore(barSportApp)
+let rootElement = document.getElementById('messages')
+
+ReactDom.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  rootElement
+)
 
 var ws = new WebSocket("ws://localhost:8989/chat");
-var messages = [];
+
 ws.onopen = function (event) {
   console.log("onopen", event);
   var count = 0;
@@ -21,9 +34,10 @@ ws.onopen = function (event) {
   }, 1000);
 }
 ws.onmessage = function (event) {
-  messages.push(event.data);
   console.log("onmessage", event.data);
-  ReactDom.render(<Messages messages={messages}/>, el);
+
+  // dispatch action on receive data
+  store.dispatch(addMessage(event.data));
 }
 ws.onerror = function (event) {
   console.log("error", event);
