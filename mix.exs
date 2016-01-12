@@ -14,7 +14,7 @@ defmodule BarSport.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :cowboy],
+    [applications: [:logger, :cowboy, :postgrex],
      mod: {BarSport, []}]
   end
 
@@ -32,9 +32,9 @@ defmodule BarSport.Mixfile do
       {:plug, "~> 1.0.2"},
       {:cowboy, "~> 1.0.4"},
       {:poison, "~> 1.5.0"},
-      # {:web_socket, path: "../plug-web-socket"},
       {:web_socket, git: "https://github.com/gpad/plug-web-socket.git", branch: "upgrade_plug"},
-      {:credo, "~> 0.1.9", only: [:dev, :test]}
+      {:credo, "~> 0.1.9", only: [:dev, :test]},
+      {:postgrex, "~> 0.10.0"},
     ]
   end
 end
