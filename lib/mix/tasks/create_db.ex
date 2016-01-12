@@ -6,17 +6,19 @@ defmodule Mix.Tasks.CreateDb do
   @shortdoc "Create DB if not present"
   @moduledoc @shortdoc
 
-  @db_name "barsport"
+  @database Application.get_env(:bar_sport, :database)
+  @hostname @database[:hostname]
+  @db_name @database[:database]
 
   def run(_) do
-    Mix.shell.info "Staring creating db #{@db_name}"
+    Mix.shell.info "Staring creating db #{inspect @db_name}"
     open |> create |> fill |> close
     Mix.shell.info "Database created."
   end
 
   defp open(database \\ "template1") do
     :ok = Application.ensure_started :postgrex
-    {:ok, pid} = Px.start_link(hostname: "localhost", database: database)
+    {:ok, pid} = Px.start_link(hostname: @hostname, database: database)
     pid
   end
 
@@ -34,7 +36,8 @@ defmodule Mix.Tasks.CreateDb do
     new_pid = open @db_name
 
     [
-      "CREATE TABLE IF NOT EXISTS Users (id SERIAL PRIMARY KEY, username VARCHAR(255), password VARCHAR(255))",
+      "CREATE TABLE IF NOT EXISTS versions (id SERIAL PRIMARY KEY, version VARCHAR(255))",
+      "CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, username VARCHAR(255), password VARCHAR(255))",
     ] |> Enum.each(&(Px.query!(new_pid, &1, [])))
     new_pid
   end

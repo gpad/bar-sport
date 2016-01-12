@@ -6,6 +6,7 @@ defmodule BarSport.Router do
   plug Plug.Static, at: "/", from: "./public", only: ["index.html"]
   plug Plug.Static, at: "/assets", from: "./public/assets"
   plug Plug.Static, at: "/dist", from: "./public/dist"
+  plug Plug.Parsers, parsers: [:urlencoded, :json],  pass: ["application/*"], json_decoder: Poison
 
   plug :match
   plug :dispatch
@@ -21,6 +22,11 @@ defmodule BarSport.Router do
 
   get "/health" do
     send_json(conn, %{status: :ok})
+  end
+
+  post "/sessions" do
+    token = BarSport.SessionController.login(conn.body_params)
+    send_json(conn, %{result: :ok, token: token })
   end
 
   match _ do
