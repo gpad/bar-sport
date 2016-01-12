@@ -1,29 +1,24 @@
 export const ADD_MESSAGE = 'ADD_MESSAGE'
-// export const COMPLETE_TODO = 'COMPLETE_TODO'
-// export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
-
-/*
- * other constants
- */
-
-// export const VisibilityFilters = {
-//   SHOW_ALL: 'SHOW_ALL',
-//   SHOW_COMPLETED: 'SHOW_COMPLETED',
-//   SHOW_ACTIVE: 'SHOW_ACTIVE'
-// }
+export const SEND_MESSAGE = 'SEND_MESSAGE'
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
 
 /*
  * action creators
  */
 
-export function addMessage(text) {
-  return { type: ADD_MESSAGE, text }
+export function addMessage(text, username) {
+  return { type: ADD_MESSAGE, text: text, username: username}
 }
 
-// export function completeTodo(index) {
-//   return { type: COMPLETE_TODO, index }
-// }
-//
-// export function setVisibilityFilter(filter) {
-//   return { type: SET_VISIBILITY_FILTER, filter }
-// }
+export function sendMessage(text, username) {
+  return { type: SEND_MESSAGE, text: text, username: username}
+}
+
+export function login(username, password){
+  return { type: LOGIN, username: username, password: password }
+}
+
+export function logout(){
+  return { type: LOGOUT }
+}

@@ -3,7 +3,10 @@ import React, {Component} from "react"
 class Message extends Component {
   render() {
     return (
-      <p>{this.props.message.text}</p>
+      <p>
+        <strong>{this.props.message.username}: </strong>
+        {this.props.message.text}
+      </p>
     );
   }
 }

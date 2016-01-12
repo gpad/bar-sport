@@ -36,4 +36,4 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
 Execute `npm install` to install all the packages required by webpack and react.
 
-To watch the modify of js for recompile with webpack I use this bash snippet: `while :; do  inotifywait -r client/ && webpack; done`.
+To watch the modify of js for recompile with webpack run `webpack --progress --colors --watch`

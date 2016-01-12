@@ -1,16 +1,5 @@
-import { combineReducers } from 'redux'
-// import { ADD_MESSAGE, COMPLETE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from './actions'
-import { ADD_MESSAGE } from './actions'
-// const { SHOW_ALL } = VisibilityFilters
-
-// function visibilityFilter(state = SHOW_ALL, action) {
-//   switch (action.type) {
-//     case SET_VISIBILITY_FILTER:
-//       return action.filter
-//     default:
-//       return state
-//   }
-// }
+import { combineReducers, createStore } from 'redux';
+import { ADD_MESSAGE, LOGIN, LOGOUT } from './actions'
 
 function messages(state = [], action) {
   switch (action.type) {
@@ -18,25 +7,36 @@ function messages(state = [], action) {
       return Object.assign([], state, [
         ...state,
         {
-          text: action.text
+          text: action.text,
+          username: action.username
         }
       ])
-    // case COMPLETE_TODO:
-    //   return [
-    //     ...state.slice(0, action.index),
-    //     Object.assign({}, state[action.index], {
-    //       completed: true
-    //     }),
-    //     ...state.slice(action.index + 1)
-    //   ]
+    default:
+      return state
+  }
+}
+
+function user(state= {}, action ){
+  switch (action.type){
+    case LOGIN:
+      return Object.assign({}, state, {isLogged: true, username: action.username})
+      break;
+    case LOGOUT:
+      return Object.assign({}, state, {isLogged: false, username: null})
+      break;
     default:
       return state
   }
 }
 
 const barSportApp = combineReducers({
-  // visibilityFilter,
+  user,
   messages
-})
+});
 
-export default barSportApp
+const store = createStore(barSportApp);
+
+export default store;
+
+
+
