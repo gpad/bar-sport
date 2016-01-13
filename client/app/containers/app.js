@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import LoginPage from '../containers/login_page'
 import MessagePage from '../containers/messages_page'
 import NavMenu from '../components/nav_menu'
-import { login, logout, addMessage, ws_connect } from '../actions'
+import { login, logout, sendMessage, ws_connect } from '../actions'
 
 class App extends Component {
 
@@ -19,9 +19,9 @@ class App extends Component {
     this.props.dispatch(logout());
   }
 
-  onSubmit(websocket, msg){
+  onSubmit(msg){
     console.log(this.props.user.username, msg);
-    this.props.dispatch(addMessage(msg, this.props.user.username))
+    this.props.dispatch(sendMessage(this.props.websocket.websocket, msg))
   }
 
   render() {

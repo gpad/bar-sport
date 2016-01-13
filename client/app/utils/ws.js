@@ -1,13 +1,14 @@
 import store from '../reducers';
+import {addMessage} from '../actions';
 
 class ChatSocket{
-  constructor(username){
-    this.username = username;
+  constructor(token){
+    this.token = token;
   }
   connect(){
-    this.ws = new WebSocket("ws://localhost:8989/chat?token="+ this.username);
+    this.ws = new WebSocket("ws://localhost:8989/chat?token="+ this.token);
     this.ws.onopen = (event) => {
-      console.info('BarSport connected with token '+ this.username);
+      console.info('BarSport connected with token '+ this.token);
     }
 
     this.ws.onmessage = function (event) {

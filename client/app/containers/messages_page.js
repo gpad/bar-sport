@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import MessageList from '../components/message_list';
 import InputMessage from '../components/input_message';
-import ChatSocket from '../utils/ws';
 
 class MessagePage extends Component {
 
