@@ -1,13 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import MessageList from '../components/message_list';
 import InputMessage from '../components/input_message';
-import { wsConnect } from '../utils/ws';
+import ChatSocket from '../utils/ws';
 
 class MessagePage extends Component {
-
-  componentDidMount(){
-    wsConnect(this.props.user.username);
-  }
 
   render(){
     return(
@@ -31,5 +27,5 @@ class MessagePage extends Component {
   }
 }
 
-export default MessagePage
+export default MessagePage;
 

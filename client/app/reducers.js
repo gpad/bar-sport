@@ -1,5 +1,6 @@
-import { combineReducers, createStore } from 'redux';
-import { ADD_MESSAGE, LOGIN, LOGOUT } from './actions'
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk'
+import { ADD_MESSAGE, LOGIN, LOGOUT, WS_CONNECTED, WS_DISCONNECTED, WS_ERROR } from './actions'
 
 function messages(state = [], action) {
   switch (action.type) {
@@ -16,7 +17,7 @@ function messages(state = [], action) {
   }
 }
 
-function user(state= {}, action ){
+function user(state = {}, action){
   switch (action.type){
     case LOGIN:
       return Object.assign({}, state, {isLogged: true, username: action.username})
@@ -29,12 +30,32 @@ function user(state= {}, action ){
   }
 }
 
+function websocket(state = {}, action){
+  switch (action.type){
+    case WS_CONNECTED:
+      return Object.assign({}, state, {status: 'connected', websocket: action.websocket})
+      break;
+    case WS_DISCONNECTED:
+      return Object.assign({}, state, {status: 'disconnected', websocket: null})
+      break;
+    case WS_ERROR:
+      break;
+    default:
+      return state
+  }
+}
+
 const barSportApp = combineReducers({
   user,
-  messages
+  messages,
+  websocket
 });
 
-const store = createStore(barSportApp);
+const createStoreWithMiddleware = applyMiddleware(
+  thunkMiddleware
+)(createStore)
+
+const store = createStoreWithMiddleware(barSportApp);
 
 export default store;
 

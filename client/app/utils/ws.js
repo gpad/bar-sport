@@ -1,21 +1,25 @@
-import store from '../reducers'
+import store from '../reducers';
 
-export function wsConnect(username){
-  const ws_url = "ws://localhost:8989/chat";
-  let ws = new WebSocket(ws_url);
-
-  ws.onopen = function (event) {
-    console.log('connected on '+ws_url);
+class ChatSocket{
+  constructor(username){
+    this.username = username;
   }
+  connect(){
+    this.ws = new WebSocket("ws://localhost:8989/chat?token="+ this.username);
+    this.ws.onopen = (event) => {
+      console.info('BarSport connected with token '+ this.username);
+    }
 
-  ws.onmessage = function (event) {
-    store.dispatch(addMessage(event.data));
+    this.ws.onmessage = function (event) {
+      store.dispatch(addMessage(event.data));
+    }
+  }
+  send(message){
+    this.ws.send(message);
   }
 }
 
-
-
-
+export default ChatSocket;
 
 //var ws = new WebSocket("ws://localhost:8989/chat");
 
