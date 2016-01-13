@@ -1,6 +1,6 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk'
-import { ADD_MESSAGE, LOGIN, LOGOUT, WS_CONNECTED, WS_DISCONNECTED, WS_ERROR } from './actions'
+import { ADD_MESSAGE, LOGGING_IN, LOGGED, LOGOUT, WS_CONNECTED, WS_DISCONNECTED, WS_ERROR } from './actions'
 
 function messages(state = [], action) {
   switch (action.type) {
@@ -19,11 +19,14 @@ function messages(state = [], action) {
 
 function user(state = {}, action){
   switch (action.type){
-    case LOGIN:
-      return Object.assign({}, state, {isLogged: true, username: action.username})
+    case LOGGING_IN:
+      return Object.assign({}, state, {isLogged: false, username: action.username, password: action.password, token: null});
+      break;
+    case LOGGED:
+      return Object.assign({}, state, {isLogged: true, username: state.username, password: state.password, token: action.token});
       break;
     case LOGOUT:
-      return Object.assign({}, state, {isLogged: false, username: null})
+      return Object.assign({}, state, {isLogged: false, username: null, password: null, token: null});
       break;
     default:
       return state

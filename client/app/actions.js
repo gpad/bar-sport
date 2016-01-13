@@ -1,7 +1,9 @@
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const SENDING_MESSAGE = 'SENDING_MESSAGE';
 export const SENT_MESSAGE = 'SENT_MESSAGE';
-export const LOGIN = 'LOGIN';
+export const LOGGING_IN = 'LOGGING_IN';
+export const LOGGED = 'LOGGED';
+
 export const LOGOUT = 'LOGOUT';
 export const WS_CONNECTING = 'WS_CONNECTING';
 export const WS_CONNECTED = 'WS_CONNECTED';
@@ -32,8 +34,46 @@ export function sendMessage(websocket, text) {
   }
 }
 
+export function loggingIn(username, password){
+  return {type: LOGGING_IN, username: username, password: password};
+}
+
+export function logged(token){
+  return {type: LOGGED, token: token};
+}
+
 export function login(username, password){
-  return { type: LOGIN, username: username, password: password }
+  return dispatch => {
+    dispatch(loggingIn(username, password));
+    fetch('/sessions', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      })
+    })
+
+    .then(function(response) {
+      if (response.status >= 200 && response.status < 300) {
+        return response
+      } else {
+        dispatch(logout());
+      }
+    })
+    .then(function(response) {
+      return response.json()
+    })
+    .then(function(response) {
+      dispatch(logged(response.token));
+    })
+    .catch(function(ex) {
+      dispatch(logout());
+    });
+  }
 }
 
 export function logout(){
@@ -47,7 +87,6 @@ export function ws_connecting(websocket){
 export function ws_connected(websocket){
   return {type: WS_CONNECTED, websocket: websocket};
 }
-
 
 export function ws_connect(websocket){
   return dispatch => {
