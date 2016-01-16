@@ -1,6 +1,8 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk'
-import { ADD_MESSAGE, LOGGING_IN, LOGGED, LOGOUT, WS_CONNECTED, WS_DISCONNECTED, WS_ERROR } from './actions'
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { ADD_MESSAGE, LOGGING_IN, LOGGED, LOGOUT, WS_CONNECTED, WS_DISCONNECTED, WS_ERROR } from './actions';
+import DevTools from './containers/dev_tools';
+import createLogger from 'redux-logger';
 
 function messages(state = [], action) {
   switch (action.type) {
@@ -48,19 +50,19 @@ function websocket(state = {}, action){
   }
 }
 
+const logger = createLogger();
+
 const barSportApp = combineReducers({
   user,
   messages,
   websocket
 });
 
-const createStoreWithMiddleware = applyMiddleware(
-  thunkMiddleware
-)(createStore)
+const finalCreateStore = compose(
+  applyMiddleware(thunkMiddleware, logger),
+  DevTools.instrument()
+)(createStore);
 
-const store = createStoreWithMiddleware(barSportApp);
+const store = finalCreateStore(barSportApp, {});
 
 export default store;
-
-
-
