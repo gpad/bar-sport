@@ -6,12 +6,8 @@ defmodule BarSportTest do
 
   @opt BarSport.Router.init([])
 
-  # test "send message via Api recevive notify via WS"
-
   test "Login with username and password" do
     user = BarSport.User.create("test", "pwd")
-
-    IO.puts inspect user
 
     conn = conn(:post, "/sessions", Poison.encode!(%{username: user.username, password: user.password}))
     |> put_req_header("content-type", "application/json")

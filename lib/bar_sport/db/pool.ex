@@ -31,10 +31,9 @@ defmodule BarSport.Db.Pool do
 
   defp verify_version({:ok, pid}) do
     case Postgrex.Connection.query(pid, "SELECT * FROM versions", []) do
-      {:ok, result} -> IO.puts("Nothig to update #{inspect result}")
+      {:ok, %{columns: ["id", "version"]}} -> {:ok, pid}
       # {:error, reason} -> raise "ERROR reason: #{inspect reason.postgres.message}"
     end
-    {:ok, pid}
   end
 
   def start_link(state) do
@@ -44,13 +43,11 @@ defmodule BarSport.Db.Pool do
   def init(_state) do
     ret = Postgrex.Connection.start_link(Application.get_env(:bar_sport, :database))
     |> verify_version
-    Logger.info "CREATE connection -> #{inspect ret}"
     ret
   end
 
-  def handle_call(cmd, from, state) do
+  def handle_call(cmd, _from, state) do
     ret = cmd.(state)
     {:reply, ret, state}
   end
-
 end

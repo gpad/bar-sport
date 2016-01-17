@@ -15,7 +15,8 @@ defmodule BarSport do
       # worker(BarSport.Worker, [arg1, arg2, arg3]),
       Plug.Adapters.Cowboy.child_spec(:http, BarSport.Router, [], [port: @port, dispatch: BarSport.Router.dispatch_table]),
       :poolboy.child_spec(:db, @db_pool_config, []),
-      worker(SessionCache, []),
+      worker(LoggedUserCache, []),
+      worker(ChatRoomServer, []),
       ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
