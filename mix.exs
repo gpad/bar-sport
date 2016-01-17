@@ -33,8 +33,8 @@ defmodule BarSport.Mixfile do
       {:poolboy, "~> 1.5"},
       {:cowboy, "~> 1.0.4"},
       {:poison, "~> 1.5"},
-      # {:web_socket, git: "https://github.com/gpad/plug-web-socket.git", branch: "manage_shutdown"},
-      {:web_socket, path: "../plug-web-socket"},
+      {:web_socket, git: "https://github.com/gpad/plug-web-socket.git", branch: "GP_dev"},
+      # {:web_socket, path: "../plug-web-socket"},
       {:credo, "~> 0.1.9", only: [:dev, :test]},
       {:postgrex, "~> 0.10.0"},
     ]

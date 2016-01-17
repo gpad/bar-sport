@@ -5,8 +5,8 @@
   "credo": {:hex, :credo, "0.1.10"},
   "decimal": {:hex, :decimal, "1.1.1"},
   "plug": {:hex, :plug, "1.0.3"},
-  "poison": {:hex, :poison, "1.5.0"},
+  "poison": {:hex, :poison, "1.5.2"},
   "poolboy": {:hex, :poolboy, "1.5.1"},
   "postgrex": {:hex, :postgrex, "0.10.0"},
   "ranch": {:hex, :ranch, "1.2.0"},
-  "web_socket": {:git, "https://github.com/gpad/plug-web-socket.git", "782aa97bbd47ea45721c97f0afdcbcc4607afe41", [branch: "upgrade_plug"]}}
+  "web_socket": {:git, "https://github.com/gpad/plug-web-socket.git", "2c6ec6f8b389a33cb44d56e89aecee04414cadf0", [branch: "GP_dev"]}}
