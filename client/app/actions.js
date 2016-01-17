@@ -1,3 +1,5 @@
+'use strict';
+
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const SENDING_MESSAGE = 'SENDING_MESSAGE';
 export const SENT_MESSAGE = 'SENT_MESSAGE';
@@ -16,7 +18,7 @@ import ChatSocket from './utils/ws';
  */
 
 export function addMessage(text, username) {
-  return { type: ADD_MESSAGE, text: text, username: username}
+  return { type: ADD_MESSAGE, text: text, username: username};
 }
 
 export function sendingMessage(){
@@ -32,7 +34,7 @@ export function sendMessage(websocket, text) {
     dispatch(sendingMessage());
     websocket.send(text);
     dispatch(sentMessage());
-  }
+  };
 }
 
 export function loggingIn(username, password){
@@ -59,14 +61,14 @@ export function login(username, password){
     })
     .then(function(response) {
       if (response.status >= 200 && response.status < 300) {
-        return response
+        return response;
       } else {
         dispatch(logout());
-        return
+        return;
       }
     })
     .then(function(response) {
-      return response.json()
+      return response.json();
     })
     .then(function(response) {
       dispatch(ws_connect(response.token));
@@ -74,7 +76,7 @@ export function login(username, password){
     .catch(function(ex) {
       dispatch(logout());
     });
-  }
+  };
 }
 
 export function logout(){
@@ -101,4 +103,3 @@ export function ws_disconnected(){
 export function ws_error(){
   return { type: WS_ERROR }
 }
-
