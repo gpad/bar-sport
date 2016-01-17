@@ -12,7 +12,7 @@ defmodule BarSport.Router do
   plug :match
   plug :dispatch
 
-  socket "/chat", ChatController, :echo
+  socket "/chat", ChatController, :messages
 
   # root "/index.html"
 
@@ -26,7 +26,6 @@ defmodule BarSport.Router do
   end
 
   post "/sessions" do
-    IO.puts inspect conn.body_params
     token = BarSport.SessionController.login(conn.body_params)
     send_json(conn, %{result: :ok, token: token })
   end

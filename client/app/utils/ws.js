@@ -12,6 +12,7 @@ class ChatSocket{
     }
 
     this.ws.onmessage = function (event) {
+      console.log("Received message ->", event);
       store.dispatch(addMessage(event.data));
     }
   }

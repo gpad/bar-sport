@@ -29,8 +29,6 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
 ## Requirments
 
-`sudo apt-get install inotify-tools`
-
 `npm install -g webpack`
 
 We use postgreSQL as DB and we need the username and password to connect to DB as environment variable `PGUSER` and `PGPASSWORD`.
@@ -42,3 +40,5 @@ Launch `mix create_db` to create sample database **(We DROP it if it's exist)**.
 Execute `npm install` to install all the packages required by webpack and react.
 
 To watch the modify of js for recompile with webpack run `webpack --progress --colors --watch`
+
+To lanch the server execute `mix --no-halt`

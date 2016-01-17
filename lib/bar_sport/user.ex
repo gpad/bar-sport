@@ -12,8 +12,10 @@ defmodule BarSport.User do
 
   def login(username, password) do
     [user | _] = Db.execute("Select * from Users where username=$1 and password=$2", [username, password])
-    |> create_users_from
-    SessionCache.put(user.id, token(user))
+      |> create_users_from
+    token = token(user)
+    LoggedUserCache.put(token, user)
+    token
   end
 
   def token(user) do
