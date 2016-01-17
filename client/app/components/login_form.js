@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 class LoginForm extends Component {
 
@@ -10,7 +10,8 @@ class LoginForm extends Component {
     };
   }
 
-  login(){
+  login(event){
+    event.preventDefault();
     this.props.onLogin(this.state.username, this.state.password);
   }
 
@@ -23,7 +24,7 @@ class LoginForm extends Component {
     const buttonDisabled = this.fieldsNotFilled();
 
     return(
-      <form className="form-horizontal">
+      <form className="form-horizontal" onSubmit={(event) => this.login(event)}>
         <div className="form-group">
           <label htmlFor="inputUsername" className="col-sm-2 control-label">Username</label>
           <div className="col-sm-10">
@@ -38,11 +39,11 @@ class LoginForm extends Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="button" className="btn btn-default" disabled={buttonDisabled} onClick={() => this.login()}>Login!</button>
+            <button type="submit" className="btn btn-default" disabled={buttonDisabled}>Login!</button>
           </div>
         </div>
       </form>
-    )
+    );
   }
 }
 

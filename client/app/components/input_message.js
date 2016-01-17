@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 class InputMessage extends Component {
   constructor(){
     super();
-    this.state = {message: ""};
+    this.state = {message: ''};
   }
 
   isSendEnabled(){
@@ -13,7 +13,7 @@ class InputMessage extends Component {
   onSubmit(event){
     event.preventDefault();
     this.props.onSubmit(this.state.message);
-    this.setState({message: ""});
+    this.setState({message: ''});
   }
 
   render(){
@@ -31,7 +31,7 @@ class InputMessage extends Component {
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
 
