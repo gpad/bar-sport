@@ -8,11 +8,7 @@ function messages(state = [], action) {
   switch (action.type) {
     case ADD_MESSAGE:
       return Object.assign([], state, [
-        ...state,
-        {
-          text: action.text,
-          username: action.username
-        }
+        ...state, JSON.parse(action.message)
       ])
     default:
       return state

@@ -17,8 +17,8 @@ import ChatSocket from './utils/ws';
  * action creators
  */
 
-export function addMessage(text, username) {
-  return { type: ADD_MESSAGE, text: text, username: username};
+export function addMessage(message) {
+  return { type: ADD_MESSAGE, message: message};
 }
 
 export function sendingMessage(){
