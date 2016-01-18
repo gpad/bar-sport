@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react'
-import LoginForm from "../components/login_form"
+import React, { Component } from 'react';
+import LoginForm from '../components/login_form';
 
 class LoginPage extends Component {
   render(){
     let divStyle = {
       marginTop: '120px'
-    }
+    };
     return(
       <section className='container'>
         <div className="row">
@@ -23,8 +23,8 @@ class LoginPage extends Component {
           </div>
         </div>
       </section>
-    )
+    );
   }
 }
 
-export default LoginPage
+export default LoginPage;

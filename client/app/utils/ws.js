@@ -1,4 +1,4 @@
-import store from '../reducers';
+import store from '../store';
 import {addMessage} from '../actions';
 
 class ChatSocket{

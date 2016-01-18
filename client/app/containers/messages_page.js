@@ -22,9 +22,8 @@ class MessagePage extends Component {
         </div>
 
       </section>
-    )
+    );
   }
 }
 
 export default MessagePage;
-

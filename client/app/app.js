@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import DevTools from './containers/dev_tools';
 
 import App from './containers/app';
-import store from './reducers';
+import store from './store';
 
 let rootElement = document.getElementById('main_container');
 

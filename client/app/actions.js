@@ -11,6 +11,8 @@ export const WS_CONNECTED = 'WS_CONNECTED';
 export const WS_DISCONNECTED = 'WS_DISCONNECTED';
 export const WS_ERROR = 'WS_ERROR';
 
+export const TOGGLE_TOOLBAR = 'TOGGLE_TOOLBAR';
+
 import ChatSocket from './utils/ws';
 
 /*
@@ -43,6 +45,10 @@ export function loggingIn(username, password){
 
 export function logged(token){
   return {type: LOGGED, token: token};
+}
+
+export function logout(){
+  return { type: LOGOUT };
 }
 
 export function login(username, password){
@@ -79,9 +85,6 @@ export function login(username, password){
   };
 }
 
-export function logout(){
-  return { type: LOGOUT }
-}
 
 export function ws_connected(websocket){
   return {type: WS_CONNECTED, websocket: websocket};
@@ -93,13 +96,17 @@ export function ws_connect(token){
     ws.connect();
     dispatch(logged(token));
     dispatch(ws_connected(ws));
-  }
+  };
 }
 
 export function ws_disconnected(){
-  return { type: WS_DISCONNECTED }
+  return { type: WS_DISCONNECTED };
 }
 
 export function ws_error(){
-  return { type: WS_ERROR }
+  return { type: WS_ERROR };
+}
+
+export function toggleToolbar(){
+  return {type: TOGGLE_TOOLBAR};
 }
