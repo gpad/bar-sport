@@ -22,6 +22,7 @@ use Mix.Config
 #
 
 config(:bar_sport, [{:port, 8989}])
+config(:bar_sport, :db_pool, [{:size, 25}, {:max_overflow, 0}])
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
@@ -29,4 +30,4 @@ config(:bar_sport, [{:port, 8989}])
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
 #
-#     import_config "#{Mix.env}.exs"
+import_config "#{Mix.env}.exs"

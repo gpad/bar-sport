@@ -19,7 +19,7 @@ defmodule BarSport.Mixfile do
   end
 
   defp applications_for(:dev), do: applications_for(:all) ++ [:remix]
-  defp applications_for(_), do: [:logger, :cowboy]
+  defp applications_for(_), do: [:logger, :cowboy, :postgrex, :poolboy]
 
   # Dependencies can be Hex packages:
   #
@@ -33,11 +33,15 @@ defmodule BarSport.Mixfile do
   defp deps do
     [
       {:plug, "~> 1.0.2"},
+      {:poolboy, "~> 1.5"},
       {:cowboy, "~> 1.0.4"},
-      {:poison, "~> 1.5.0"},
-      {:web_socket, git: "https://github.com/gpad/plug-web-socket.git", branch: "upgrade_plug"},
+      {:poison, "~> 1.5"},
+      # {:web_socket, git: "https://github.com/gpad/plug-web-socket.git", branch: "upgrade_plug"},
+      {:web_socket, git: "https://github.com/gpad/plug-web-socket.git", branch: "GP_dev"},
+      {:postgrex, "~> 0.10"},
       {:credo, "~> 0.1.9", only: [:dev, :test]},
       {:remix, "~> 0.0", only: :dev},
+      {:credo, "~> 0.1.9", only: [:dev, :test]},
     ]
   end
 end
