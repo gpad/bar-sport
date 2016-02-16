@@ -1,5 +1,6 @@
 defmodule BarSport do
   use Application
+  require Logger
 
   @port Application.get_env(:bar_sport, :port)
 
@@ -13,6 +14,8 @@ defmodule BarSport do
       # worker(BarSport.Worker, [arg1, arg2, arg3]),
       Plug.Adapters.Cowboy.child_spec(:http, BarSport.Router, [], [port: @port, dispatch: BarSport.Router.dispatch_table])
     ]
+
+    Logger.info("Go to http://localhot:#{@port}")
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
