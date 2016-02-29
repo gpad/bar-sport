@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.CreateDb do
   use Mix.Task
 
-  alias Postgrex.Connection, as: Px
+  alias Postgrex, as: Px
 
   @shortdoc "Create DB if not present"
   @moduledoc @shortdoc
@@ -17,13 +17,14 @@ defmodule Mix.Tasks.CreateDb do
   end
 
   defp open(database \\ "template1") do
-    :ok = Application.ensure_started :postgrex
+    {:ok, _ } = Application.ensure_all_started(:postgrex)
     {:ok, pid} = Px.start_link(hostname: @hostname, database: database)
     pid
   end
 
   defp close(pid) do
-    Px.stop(pid)
+    # Px.stop(pid)
+    :ok
   end
 
   defp create(pid) do
@@ -32,7 +33,7 @@ defmodule Mix.Tasks.CreateDb do
       "CREATE DATABASE #{@db_name}",
     ] |> Enum.each(&(Px.query!(pid, &1, [])))
 
-    :ok = Px.stop(pid)
+    :ok = close(pid)
     new_pid = open @db_name
 
     [

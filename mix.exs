@@ -4,7 +4,7 @@ defmodule BarSport.Mixfile do
   def project do
     [app: :bar_sport,
      version: "0.0.1",
-     elixir: "~> 1.1",
+     elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
@@ -38,7 +38,7 @@ defmodule BarSport.Mixfile do
       {:poison, "~> 1.5"},
       # {:web_socket, git: "https://github.com/gpad/plug-web-socket.git", branch: "upgrade_plug"},
       {:web_socket, git: "https://github.com/gpad/plug-web-socket.git", branch: "GP_dev"},
-      {:postgrex, "~> 0.10"},
+      {:postgrex, "~> 0.11"},
       {:credo, "~> 0.1.9", only: [:dev, :test]},
       {:remix, "~> 0.0", only: :dev},
       {:credo, "~> 0.1.9", only: [:dev, :test]},
