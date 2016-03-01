@@ -8,7 +8,7 @@ defmodule BarSport.Db do
 
   def execute(query, params) do
     execute fn pid ->
-      Postgrex.Connection.query!(pid, query, params)
+      Postgrex.query!(pid, query, params)
     end
   end
 
